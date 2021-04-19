@@ -3,7 +3,6 @@ package com.morozov.toprankingservice.controller;
 import com.morozov.toprankingservice.repository.ScoreRepository;
 import com.morozov.toprankingservice.service.PlayerScoreHistoryService;
 import org.junit.jupiter.api.RepeatedTest;
-import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
