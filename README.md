@@ -4,7 +4,7 @@ Thus must allow the following actions:
 
  * Create Score
  * Get score by id
- * Get list of scores by filter
+ * Get list of scores by the filter with paging supported
  * Get players' history
 * **Get player's top score**
 * **Get player's lowest score**
