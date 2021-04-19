@@ -6,15 +6,15 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.time.LocalDateTime;
 
-public class ScoreRequest {
+public class AddScoreRequest {
     private final String player;
     private final Integer score;
     private final LocalDateTime time;
 
     @JsonCreator
-    public ScoreRequest(@JsonProperty("player") String player,
-                        @JsonProperty("score") Integer score,
-                        @JsonProperty("time") LocalDateTime time) {
+    public AddScoreRequest(@JsonProperty("player") String player,
+                           @JsonProperty("score") Integer score,
+                           @JsonProperty("time") LocalDateTime time) {
         this.player = player;
         this.score = score;
         this.time = time;

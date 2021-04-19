@@ -1,5 +1,7 @@
 package com.morozov.toprankingservice.dto;
 
+import com.morozov.toprankingservice.entity.ScoreEntity;
+
 import java.time.LocalDateTime;
 import java.util.Objects;
 import java.util.UUID;
@@ -16,6 +18,15 @@ public class Score {
         this.player = player;
         this.score = score;
         this.time = time;
+    }
+
+    public Score(ScoreEntity entity) {
+        Objects.requireNonNull(entity);
+
+        this.id = entity.getId();
+        this.player = entity.getPlayer();
+        this.score = entity.getScore();
+        this.time = entity.getTime();
     }
 
     public UUID getId() {
