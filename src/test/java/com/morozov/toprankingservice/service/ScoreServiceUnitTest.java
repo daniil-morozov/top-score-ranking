@@ -6,9 +6,11 @@ import com.morozov.toprankingservice.dto.Score;
 import com.morozov.toprankingservice.dto.response.ScoreResponse;
 import com.morozov.toprankingservice.entity.ScoreEntity;
 import com.morozov.toprankingservice.repository.ScoreRepository;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -60,6 +62,37 @@ class ScoreServiceUnitTest {
 
         Mockito.verify(repository).findAll(pageable);
         assertEquals(expected, result, "Should return empty for incorrect page");
+    }
+
+    @Test
+    @DisplayName("Return ok when score exists")
+    void Should_return_ok_When_score_exists() {
+
+        final ScoreRepository repository = Mockito.mock(ScoreRepository.class);
+
+        final UUID request = UUID.randomUUID();
+
+        Mockito.doNothing().when(repository).deleteById(request);
+
+        final ScoreService service = new ScoreService(repository);
+        service.delete(request);
+
+        Mockito.verify(repository).deleteById(request);
+    }
+
+    @Test
+    @DisplayName("Throw exception when score doesn't exist")
+    void Should_throw_emptySet_When_score_doesnt_exist() {
+
+        final ScoreRepository repository = Mockito.mock(ScoreRepository.class);
+
+        final UUID request = UUID.randomUUID();
+
+        Mockito.doThrow(new EmptyResultDataAccessException(1)).when(repository).deleteById(request);
+
+        final ScoreService service = new ScoreService(repository);
+
+        Assertions.assertThrows(EmptyResultDataAccessException.class, () -> service.delete(request));
     }
 
     private List<ScoreEntity> generateResponse() {

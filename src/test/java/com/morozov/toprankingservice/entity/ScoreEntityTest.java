@@ -9,7 +9,7 @@ import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class ScoreResponseEntityTest {
+class ScoreEntityTest {
     @Test
     public void Test_getters() {
         final UUID id = UUID.randomUUID();

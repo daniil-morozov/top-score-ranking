@@ -41,6 +41,10 @@ public class ScoreController {
 
     @PostMapping
     public ResponseEntity<String> add(@RequestBody ScoreRequest request) {
+        if (request.getScore() <= 0) {
+            return new ResponseEntity<>("Incorrect score value: must be more than 0", HttpStatus.BAD_REQUEST);
+        }
+
         scoreService.add(new Score(UUID.randomUUID(),
                 request.getPlayer().toLowerCase(Locale.ROOT),
                 request.getScore(),
