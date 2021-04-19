@@ -1,9 +1,9 @@
 # Top Score Ranking Restful service
 
 
-#API Description
+# API Description
 
-##Scores
+## Scores
 
 **Add score**
 ----
@@ -55,7 +55,7 @@ Add a new score for specified player at certain time
 * **Sample Call:**
 
     ```shell
-    curl --location --request POST '/scores/' \
+    curl --location --request POST '{{url:port}}/scores/' \
     --header 'Content-Type: application/json' \
     --data-raw '{
         "player": "Danya",
@@ -105,7 +105,7 @@ Delete a score with a specified id
 * **Sample Call:**
 
     ```shell
-    curl --location --request DELETE '/scores/2945ae9c-aadd-4beb-8803-97bb926c8c01' \
+    curl --location --request DELETE '{{url:port}}/scores/2945ae9c-aadd-4beb-8803-97bb926c8c01' \
     --header 'Content-Type: application/json''
     ```
 
@@ -157,7 +157,7 @@ Returns json array of scores for a player.
 * **Sample Call:**
 
   ```shell
-    curl --location --request GET '/playerscorehistory/danya' \
+    curl --location --request GET '{{url:port}}/playerscorehistory/danya' \
   --header 'Content-Type: application/json'
   ```
 
@@ -201,7 +201,7 @@ Returns a json object representing a top score for a player.
 * **Sample Call:**
 
   ```shell
-    curl --location --request GET '/playerscorehistory/top/danya' \
+    curl --location --request GET '{{url:port}}/playerscorehistory/top/danya' \
   --header 'Content-Type: application/json'
   ```
 
@@ -245,7 +245,7 @@ Returns a json object representing a top score for a player.
 * **Sample Call:**
 
   ```shell
-    curl --location --request GET '/playerscorehistory/lowest/danya' \
+    curl --location --request GET '{{url:port}}/playerscorehistory/lowest/danya' \
   --header 'Content-Type: application/json'
   ```
 
@@ -276,7 +276,7 @@ Returns a number representing a top score for a player.
     * **Code:** 200 <br />
       **Content:**
       ```json
-        95
+       95
       ```
 
 * **Error Response:**
@@ -286,6 +286,6 @@ Returns a number representing a top score for a player.
 * **Sample Call:**
 
   ```shell
-    curl --location --request GET '/playerscorehistory/avg/danya' \
+    curl --location --request GET '{{url:port}}/playerscorehistory/avg/danya' \
   --header 'Content-Type: application/json'
   ```
