@@ -476,3 +476,10 @@ Returns a number representing a top score for a player.
     curl --location --request GET '{{url:port}}/playerscorehistory/avg/danya' \
   --header 'Content-Type: application/json'
   ```
+  
+# Things to improve
+
+ * No serious validation except score > 0. The user may add a score with and empty name player 
+ * Overloaded get scores by filter method. Probably, can be optimized
+ * No comments on the code, although the methods are descriptive enough
+ * No integration tests with a real DB, but there is a Postman collection  
