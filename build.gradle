@@ -1,0 +1,50 @@
+plugins {
+    id 'java'
+    id 'idea'
+    id 'org.springframework.boot' version '2.4.5'
+    id "com.github.johnrengelman.shadow" version '5.2.0'
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+}
+
+group 'com.morozov'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = '11'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.mockito:mockito-core:3.8.0'
+    testImplementation platform('org.junit:junit-bom:5.7.1')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    runtimeOnly 'org.postgresql:postgresql'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+test {
+    useJUnitPlatform()
+    testLogging {
+        events "passed", "skipped", "failed"
+    }
+}
+
+
+jar {
+    manifest {
+        attributes(
+                'Main-Class': 'Main'
+        )
+    }
+}
+
+shadowJar {
+    manifest {
+        attributes('Main-Class': 'Main')
+    }
+}
+
+tasks.build.dependsOn tasks.shadowJar
