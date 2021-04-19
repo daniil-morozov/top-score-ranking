@@ -84,6 +84,10 @@ public class ScoreController {
 
         final Optional<ScoreResponse> result = serviceResponse.map(ScoreResponse::new);
 
+        if (result.isEmpty()) {
+            return new ResponseEntity<>(result, HttpStatus.NOT_FOUND);
+        }
+
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 

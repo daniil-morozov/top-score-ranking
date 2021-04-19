@@ -1,0 +1,259 @@
+{
+	"info": {
+		"_postman_id": "bab7e0b5-6913-442c-9ab0-1a269b4abd5b",
+		"name": "top-score",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "add score",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"const moment = require('moment');",
+							"pm.globals.set(\"currenttime\", moment().format(\"YYYY-MM-DDTHH:mm:ss\"));"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"player\": \"Danya\",\n    \"score\": 99,\n    \"time\": \"{{currenttime}}\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/scores/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"scores",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get all scores by filter",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"players\": [\"danya\"],\n    \"after\": \"2021-04-19T11:00:00\",\n    \"before\":  \"2021-04-19T19:01:00\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/scores/all?page=0&size=12",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"scores",
+						"all"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "0"
+						},
+						{
+							"key": "size",
+							"value": "12"
+						}
+					]
+				},
+				"description": "Get all scores with paging"
+			},
+			"response": []
+		},
+		{
+			"name": "get score by id",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/scores/c206fd8d-a105-4ba5-aadd-1efb946a8d84",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"scores",
+						"c206fd8d-a105-4ba5-aadd-1efb946a8d84"
+					]
+				},
+				"description": "Get all scores with paging"
+			},
+			"response": []
+		},
+		{
+			"name": "get scores by player",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/playerscorehistory/danya",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"playerscorehistory",
+						"danya"
+					]
+				},
+				"description": "Get all scores with paging"
+			},
+			"response": []
+		},
+		{
+			"name": "get top score by player",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/playerscorehistory/top/danya",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"playerscorehistory",
+						"top",
+						"danya"
+					]
+				},
+				"description": "Get all scores with paging"
+			},
+			"response": []
+		},
+		{
+			"name": "get lowest score by player",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/playerscorehistory/lowest/danya",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"playerscorehistory",
+						"lowest",
+						"danya"
+					]
+				},
+				"description": "Get all scores with paging"
+			},
+			"response": []
+		},
+		{
+			"name": "get average score by player",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/playerscorehistory/avg/danya",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"playerscorehistory",
+						"avg",
+						"danya"
+					]
+				},
+				"description": "Get all scores with paging"
+			},
+			"response": []
+		},
+		{
+			"name": "delete score",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/scores/2945ae9c-aadd-4beb-8803-97bb926c8c01",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"scores",
+						"2945ae9c-aadd-4beb-8803-97bb926c8c01"
+					]
+				},
+				"description": "Get all scores with paging"
+			},
+			"response": []
+		}
+	]
+}

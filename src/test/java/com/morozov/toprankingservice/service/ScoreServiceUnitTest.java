@@ -1,6 +1,4 @@
 package com.morozov.toprankingservice.service;
-import static net.bytebuddy.matcher.ElementMatchers.is;
-import static org.junit.jupiter.api.Assertions.*;
 
 import com.morozov.toprankingservice.dto.Score;
 import com.morozov.toprankingservice.dto.ScoreFilter;
@@ -22,6 +20,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class ScoreServiceUnitTest {
 
