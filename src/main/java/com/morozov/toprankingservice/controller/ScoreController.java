@@ -20,6 +20,7 @@ import java.util.stream.Collectors;
 @RequestMapping(path = "/scores",
         produces = MediaType.APPLICATION_JSON_VALUE)
 public class ScoreController {
+    public static final String SORT_BY = "time";
     private final ScoreService scoreService;
 
     @Autowired
@@ -30,7 +31,7 @@ public class ScoreController {
     @GetMapping(value = "/all", params = {"page", "size"})
     public ResponseEntity<List<ScoreResponse>> get(@RequestParam("page") int page,
                                                    @RequestParam("size") int size) {
-        List<Score> serviceResponse = scoreService.getAll(page, size, "id");
+        List<Score> serviceResponse = scoreService.getAll(page, size, SORT_BY);
         List<ScoreResponse> result = serviceResponse
                 .stream()
                 .map(ScoreResponse::new)

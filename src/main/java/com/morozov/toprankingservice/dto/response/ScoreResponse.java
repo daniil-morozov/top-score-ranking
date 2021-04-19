@@ -15,7 +15,6 @@ public class ScoreResponse {
     private final Integer score;
     private final LocalDateTime time;
 
-    @JsonCreator
     public ScoreResponse(Score score) {
         this.id = score.getId();
         this.score = score.getScore();
@@ -23,22 +22,22 @@ public class ScoreResponse {
         this.time = score.getTime();
     }
 
-    @JsonGetter(value = "id")
+    @JsonGetter
     public UUID getId() {
         return id;
     }
 
-    @JsonGetter(value = "player")
+    @JsonGetter
     public String getPlayer() {
         return player;
     }
 
-    @JsonGetter(value = "score")
+    @JsonGetter
     public Integer getScore() {
         return score;
     }
 
-    @JsonGetter(value = "time")
+    @JsonGetter
     public LocalDateTime getTime() {
         return time;
     }

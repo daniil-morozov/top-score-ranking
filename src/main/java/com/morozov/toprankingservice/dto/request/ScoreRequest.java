@@ -2,6 +2,7 @@ package com.morozov.toprankingservice.dto.request;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonGetter;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.time.LocalDateTime;
 
@@ -11,23 +12,25 @@ public class ScoreRequest {
     private final LocalDateTime time;
 
     @JsonCreator
-    public ScoreRequest(String player, Integer score, LocalDateTime time) {
+    public ScoreRequest(@JsonProperty("player") String player,
+                        @JsonProperty("score") Integer score,
+                        @JsonProperty("time") LocalDateTime time) {
         this.player = player;
         this.score = score;
         this.time = time;
     }
 
-    @JsonGetter(value = "player")
+    @JsonGetter
     public String getPlayer() {
         return player;
     }
 
-    @JsonGetter(value = "score")
+    @JsonGetter
     public Integer getScore() {
         return score;
     }
 
-    @JsonGetter(value = "time")
+    @JsonGetter
     public LocalDateTime getTime() {
         return time;
     }

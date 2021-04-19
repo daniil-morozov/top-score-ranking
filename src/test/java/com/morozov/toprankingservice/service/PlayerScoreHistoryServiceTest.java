@@ -13,38 +13,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class PlayerScoreHistoryServiceTest {
 
-    static class TimeScoreImpl implements ScoreRepository.TimeScore {
-        private final LocalDateTime time;
-        private final Integer score;
-
-        public TimeScoreImpl(LocalDateTime time, Integer score) {
-            this.time = time;
-            this.score = score;
-        }
-
-        @Override
-        public LocalDateTime getTime() {
-            return time;
-        }
-
-        @Override
-        public Integer getScore() {
-            return score;
-        }
-
-        @Override
-        public boolean equals(Object o) {
-            if (this == o) return true;
-            if (o == null || getClass() != o.getClass()) return false;
-            TimeScoreImpl timeScore = (TimeScoreImpl) o;
-            return time.equals(timeScore.time) && score.equals(timeScore.score);
-        }
-
-        @Override
-        public int hashCode() {
-            return Objects.hash(time, score);
-        }
-    }
     @Test
     @DisplayName("Get top score by player")
     void getTop() {
@@ -112,5 +80,38 @@ class PlayerScoreHistoryServiceTest {
 
         Mockito.verify(repository).findAllByPlayer(player);
         assertEquals(expected, result, "Should return all scores by player");
+    }
+
+    static class TimeScoreImpl implements ScoreRepository.TimeScore {
+        private final LocalDateTime time;
+        private final Integer score;
+
+        public TimeScoreImpl(LocalDateTime time, Integer score) {
+            this.time = time;
+            this.score = score;
+        }
+
+        @Override
+        public LocalDateTime getTime() {
+            return time;
+        }
+
+        @Override
+        public Integer getScore() {
+            return score;
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+            TimeScoreImpl timeScore = (TimeScoreImpl) o;
+            return time.equals(timeScore.time) && score.equals(timeScore.score);
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(time, score);
+        }
     }
 }
