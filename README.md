@@ -243,7 +243,7 @@ Add a new score for specified player at certain time
     **Content:**
 
     | Parameter | Type | Description |
-        | :--- | :--- | :--- |
+    | :--- | :--- | :--- |
     | `player` | `string` | **Required**. player name |
     | `time` | `date:yyyy-MM-ddTdd:mm:ss` | **Required**. score time |
     | `score` | `integer` | **Required**. score value. must be > 0 |
@@ -318,6 +318,7 @@ Delete a score with a specified id
     curl --location --request DELETE '{{url:port}}/scores/2945ae9c-aadd-4beb-8803-97bb926c8c01' \
     --header 'Content-Type: application/json''
     ```
+
 
 ##Player history
 
