@@ -100,10 +100,10 @@ Get a score by its id
 * **URL**
 
   ```http
-  GET /scores:scoreId
+  GET /scores/:scoreId
   ```
 
-* **URL Params**
+* **Path Params**
 
   | Parameter | Type | Description |
   | :--- | :--- | :--- |
@@ -283,10 +283,10 @@ Delete a score with a specified id
 * **URL**
 
   ```http
-  DELETE /scores:scoreId
+  DELETE /scores/:scoreId
   ```
   
-*  **URL Params**
+*  **Path Params**
    
     | Parameter | Type | Description |
     | :--- | :--- | :--- |
@@ -335,7 +335,7 @@ Returns json array of scores for a player.
   GET /playerscorehistory/:player
   ```
 
-*  **URL Params**
+*  **Path Params**
 
    | Parameter | Type | Description |
    | :--- | :--- | :--- |
@@ -386,7 +386,7 @@ Returns a json object representing a top score for a player.
   GET /playerscorehistory/top/:player
   ```
 
-*  **URL Params**
+*  **Path Params**
 
     | Parameter | Type | Description |
     | :--- | :--- | :--- |
@@ -431,7 +431,7 @@ Returns a json object representing a top score for a player.
   GET /playerscorehistory/lowest/:player
   ```
 
-*  **URL Params**
+*  **Path Params**
 
     | Parameter | Type | Description |
     | :--- | :--- | :--- |
@@ -476,7 +476,7 @@ Returns a number representing a top score for a player.
   GET /playerscorehistory/avg/:player
   ```
 
-*  **URL Params**
+*  **Path Params**
 
     | Parameter | Type | Description |
     | :--- | :--- | :--- |
