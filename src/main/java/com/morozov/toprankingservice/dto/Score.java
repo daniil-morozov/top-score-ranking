@@ -53,7 +53,9 @@ public class Score {
       return false;
     }
     Score score1 = (Score) o;
-    return id.equals(score1.id) && player.equals(score1.player) && score.equals(score1.score)
+    return id.equals(score1.id)
+        && player.equals(score1.player)
+        && score.equals(score1.score)
         && time.equals(score1.time);
   }
 

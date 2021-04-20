@@ -23,6 +23,5 @@ class GetScoreRequestTest {
     assertEquals(after, pojo.getAfter());
     assertEquals(before, pojo.getBefore());
     assertEquals(players, pojo.getPlayers());
-
   }
 }

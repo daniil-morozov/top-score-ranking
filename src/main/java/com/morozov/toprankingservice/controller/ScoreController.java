@@ -27,8 +27,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(path = "/scores",
-    produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(path = "/scores", produces = MediaType.APPLICATION_JSON_VALUE)
 public class ScoreController {
 
   public static final String SORT_BY = "time";
@@ -39,21 +38,19 @@ public class ScoreController {
     this.scoreService = scoreService;
   }
 
-  @GetMapping(value = "/all", params = {"page", "size"})
-  public ResponseEntity<List<ScoreResponse>> getAll(@RequestParam("page") int page,
+  @GetMapping(
+      value = "/all",
+      params = {"page", "size"})
+  public ResponseEntity<List<ScoreResponse>> getAll(
+      @RequestParam("page") int page,
       @RequestParam("size") int size,
       @RequestBody(required = false) GetScoreRequest request) {
     ScoreFilter filter = createScoreFilter(request);
 
-    final List<Score> serviceResponse = scoreService.getAll(page,
-        size,
-        SORT_BY,
-        filter);
+    final List<Score> serviceResponse = scoreService.getAll(page, size, SORT_BY, filter);
 
-    final List<ScoreResponse> result = serviceResponse
-        .stream()
-        .map(ScoreResponse::new)
-        .collect(Collectors.toList());
+    final List<ScoreResponse> result =
+        serviceResponse.stream().map(ScoreResponse::new).collect(Collectors.toList());
 
     return new ResponseEntity<>(result, HttpStatus.OK);
   }
@@ -64,14 +61,13 @@ public class ScoreController {
     if (request == null) {
       filter = ScoreFilter.EMPTY;
     } else {
-      filter = new ScoreFilter(
-          Optional.ofNullable(request.getPlayers()).orElse(Collections.emptyList())
-              .stream()
-              .map(name -> name.toLowerCase(Locale.ROOT))
-              .collect(Collectors.toList()),
-          request.getBefore(),
-          request.getAfter()
-      );
+      filter =
+          new ScoreFilter(
+              Optional.ofNullable(request.getPlayers()).orElse(Collections.emptyList()).stream()
+                  .map(name -> name.toLowerCase(Locale.ROOT))
+                  .collect(Collectors.toList()),
+              request.getBefore(),
+              request.getAfter());
     }
 
     return filter;
@@ -94,14 +90,16 @@ public class ScoreController {
   @PostMapping
   public ResponseEntity<String> add(@RequestBody AddScoreRequest request) {
     if (request.getScore() <= 0) {
-      return new ResponseEntity<>("Incorrect score value: must be more than 0",
-          HttpStatus.BAD_REQUEST);
+      return new ResponseEntity<>(
+          "Incorrect score value: must be more than 0", HttpStatus.BAD_REQUEST);
     }
 
-    scoreService.add(new Score(UUID.randomUUID(),
-        request.getPlayer().toLowerCase(Locale.ROOT),
-        request.getScore(),
-        request.getTime()));
+    scoreService.add(
+        new Score(
+            UUID.randomUUID(),
+            request.getPlayer().toLowerCase(Locale.ROOT),
+            request.getScore(),
+            request.getTime()));
 
     return new ResponseEntity<>("Added", HttpStatus.CREATED);
   }

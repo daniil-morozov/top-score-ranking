@@ -31,12 +31,14 @@ public class ScoreService {
     final Page<ScoreEntity> pagedResult = makeRequest(filter, paging);
 
     if (pagedResult != null && pagedResult.hasContent()) {
-      return pagedResult.getContent()
-          .stream()
-          .map(scoreEntity -> new Score(scoreEntity.getId(),
-              scoreEntity.getPlayer(),
-              scoreEntity.getScore(),
-              scoreEntity.getTime()))
+      return pagedResult.getContent().stream()
+          .map(
+              scoreEntity ->
+                  new Score(
+                      scoreEntity.getId(),
+                      scoreEntity.getPlayer(),
+                      scoreEntity.getScore(),
+                      scoreEntity.getTime()))
           .collect(Collectors.toList());
     } else {
       return new ArrayList<>();
@@ -48,40 +50,25 @@ public class ScoreService {
 
     if (filter.getPlayers() != null && !filter.getPlayers().isEmpty()) {
       if (filter.getBefore() != null && filter.getAfter() != null) {
-        pagedResult = repository.findByPlayerInAndTimeBetween(
-            filter.getPlayers(),
-            filter.getAfter(),
-            filter.getBefore(),
-            paging);
+        pagedResult =
+            repository.findByPlayerInAndTimeBetween(
+                filter.getPlayers(), filter.getAfter(), filter.getBefore(), paging);
       } else if (filter.getBefore() != null) {
-        pagedResult = repository.findByPlayerInAndTimeBefore(
-            filter.getPlayers(),
-            filter.getBefore(),
-            paging);
+        pagedResult =
+            repository.findByPlayerInAndTimeBefore(filter.getPlayers(), filter.getBefore(), paging);
       } else if (filter.getAfter() != null) {
-        pagedResult = repository.findByPlayerInAndTimeAfter(
-            filter.getPlayers(),
-            filter.getAfter(),
-            paging);
+        pagedResult =
+            repository.findByPlayerInAndTimeAfter(filter.getPlayers(), filter.getAfter(), paging);
       } else {
-        pagedResult = repository.findByPlayerIn(
-            filter.getPlayers(),
-            paging);
+        pagedResult = repository.findByPlayerIn(filter.getPlayers(), paging);
       }
     } else {
       if (filter.getBefore() != null && filter.getAfter() != null) {
-        pagedResult = repository.findByTimeBetween(
-            filter.getAfter(),
-            filter.getBefore(),
-            paging);
+        pagedResult = repository.findByTimeBetween(filter.getAfter(), filter.getBefore(), paging);
       } else if (filter.getBefore() != null) {
-        pagedResult = repository.findByTimeBefore(
-            filter.getBefore(),
-            paging);
+        pagedResult = repository.findByTimeBefore(filter.getBefore(), paging);
       } else if (filter.getAfter() != null) {
-        pagedResult = repository.findByTimeAfter(
-            filter.getAfter(),
-            paging);
+        pagedResult = repository.findByTimeAfter(filter.getAfter(), paging);
       } else {
         pagedResult = repository.findAll(paging);
       }
@@ -97,10 +84,8 @@ public class ScoreService {
   }
 
   public void add(Score score) {
-    repository.save(new ScoreEntity(score.getId(),
-        score.getPlayer(),
-        score.getScore(),
-        score.getTime()));
+    repository.save(
+        new ScoreEntity(score.getId(), score.getPlayer(), score.getScore(), score.getTime()));
   }
 
   public void delete(UUID scoreId) {

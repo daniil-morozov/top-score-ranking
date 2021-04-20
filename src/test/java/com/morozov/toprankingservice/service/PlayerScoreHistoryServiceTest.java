@@ -29,7 +29,6 @@ class PlayerScoreHistoryServiceTest {
     assertEquals(expected, result, "Should return top score");
   }
 
-
   @Test
   @DisplayName("Get lowest score by player")
   void getLowest() {
@@ -70,8 +69,8 @@ class PlayerScoreHistoryServiceTest {
     final ScoreRepository repository = Mockito.mock(ScoreRepository.class);
 
     final String player = "player";
-    final List<ScoreRepository.TimeScore> expected = List
-        .of(new TimeScoreImpl(LocalDateTime.now(), 100));
+    final List<ScoreRepository.TimeScore> expected =
+        List.of(new TimeScoreImpl(LocalDateTime.now(), 100));
 
     Mockito.when(repository.findAllByPlayer(player)).thenReturn(expected);
 
@@ -104,12 +103,12 @@ class PlayerScoreHistoryServiceTest {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
+      if (this == o) {
+        return true;
+      }
+      if (o == null || getClass() != o.getClass()) {
+        return false;
+      }
       TimeScoreImpl timeScore = (TimeScoreImpl) o;
       return time.equals(timeScore.time) && score.equals(timeScore.score);
     }

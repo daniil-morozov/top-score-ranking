@@ -33,18 +33,17 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 @WebMvcTest(ScoreController.class)
 class ScoreControllerTest {
 
-  private static final DateTimeFormatter FORMATTER = new DateTimeFormatterBuilder()
-      .appendPattern("yyyy-MM-dd'T'HH:mm:ss")
-      .optionalStart()
-      .appendFraction(ChronoField.MICRO_OF_SECOND, 0, 6, true)
-      .optionalEnd()
-      .toFormatter();
+  private static final DateTimeFormatter FORMATTER =
+      new DateTimeFormatterBuilder()
+          .appendPattern("yyyy-MM-dd'T'HH:mm:ss")
+          .optionalStart()
+          .appendFraction(ChronoField.MICRO_OF_SECOND, 0, 6, true)
+          .optionalEnd()
+          .toFormatter();
 
-  @Autowired
-  private MockMvc mvc;
+  @Autowired private MockMvc mvc;
 
-  @MockBean
-  private ScoreService service;
+  @MockBean private ScoreService service;
 
   @RepeatedTest(3)
   void givenScores_whenGetScores_thenReturnJsonArray() throws Exception {
@@ -58,24 +57,20 @@ class ScoreControllerTest {
 
     given(service.getAll(pageNo, pageSize, time, ScoreFilter.EMPTY)).willReturn(allScores);
 
-    mvc.perform(MockMvcRequestBuilders.get("/scores/all")
-        .param("page", pageNo.toString())
-        .param("size", pageSize.toString())
-        .contentType(MediaType.APPLICATION_JSON_VALUE))
+    mvc.perform(
+            MockMvcRequestBuilders.get("/scores/all")
+                .param("page", pageNo.toString())
+                .param("size", pageSize.toString())
+                .contentType(MediaType.APPLICATION_JSON_VALUE))
         .andExpect(status().isOk())
-        .andExpect(content()
-            .contentTypeCompatibleWith(MediaType.APPLICATION_JSON_VALUE))
+        .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON_VALUE))
         .andExpect(jsonPath("$", hasSize(1)))
         .andExpect(jsonPath("$[0].id", is(score.getId().toString())))
         .andExpect(jsonPath("$[0].time").value(score.getTime().format(FORMATTER)))
         .andExpect(jsonPath("$[0].score", is(score.getScore())))
         .andExpect(jsonPath("$[0].player", is(score.getPlayer())));
 
-    verify(service, times(1)).getAll(
-        pageNo,
-        pageSize,
-        time,
-        ScoreFilter.EMPTY);
+    verify(service, times(1)).getAll(pageNo, pageSize, time, ScoreFilter.EMPTY);
   }
 
   @RepeatedTest(3)
@@ -90,33 +85,31 @@ class ScoreControllerTest {
     final Integer pageSize = 10;
     final String time = "time";
 
-    final String content = "{\"after\": \"" +
-        FORMATTER.format(after) +
-        "\",\"before\":  \"" +
-        FORMATTER.format(before) + "\"}";
+    final String content =
+        "{\"after\": \""
+            + FORMATTER.format(after)
+            + "\",\"before\":  \""
+            + FORMATTER.format(before)
+            + "\"}";
 
     given(service.getAll(eq(pageNo), eq(pageSize), eq(time), any(ScoreFilter.class)))
         .willReturn(allScores);
 
-    mvc.perform(MockMvcRequestBuilders.get("/scores/all")
-        .param("page", pageNo.toString())
-        .param("size", pageSize.toString())
-        .contentType(MediaType.APPLICATION_JSON_VALUE)
-        .content(content))
+    mvc.perform(
+            MockMvcRequestBuilders.get("/scores/all")
+                .param("page", pageNo.toString())
+                .param("size", pageSize.toString())
+                .contentType(MediaType.APPLICATION_JSON_VALUE)
+                .content(content))
         .andExpect(status().isOk())
-        .andExpect(content()
-            .contentTypeCompatibleWith(MediaType.APPLICATION_JSON_VALUE))
+        .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON_VALUE))
         .andExpect(jsonPath("$", hasSize(1)))
         .andExpect(jsonPath("$[0].id", is(score.getId().toString())))
         .andExpect(jsonPath("$[0].time").value(score.getTime().format(FORMATTER)))
         .andExpect(jsonPath("$[0].score", is(score.getScore())))
         .andExpect(jsonPath("$[0].player", is(score.getPlayer())));
 
-    verify(service, times(1)).getAll(
-        eq(pageNo),
-        eq(pageSize),
-        eq(time),
-        any(ScoreFilter.class));
+    verify(service, times(1)).getAll(eq(pageNo), eq(pageSize), eq(time), any(ScoreFilter.class));
   }
 
   @RepeatedTest(3)
@@ -135,25 +128,21 @@ class ScoreControllerTest {
     given(service.getAll(eq(pageNo), eq(pageSize), eq(time), any(ScoreFilter.class)))
         .willReturn(allScores);
 
-    mvc.perform(MockMvcRequestBuilders.get("/scores/all")
-        .param("page", pageNo.toString())
-        .param("size", pageSize.toString())
-        .contentType(MediaType.APPLICATION_JSON_VALUE)
-        .content(content))
+    mvc.perform(
+            MockMvcRequestBuilders.get("/scores/all")
+                .param("page", pageNo.toString())
+                .param("size", pageSize.toString())
+                .contentType(MediaType.APPLICATION_JSON_VALUE)
+                .content(content))
         .andExpect(status().isOk())
-        .andExpect(content()
-            .contentTypeCompatibleWith(MediaType.APPLICATION_JSON_VALUE))
+        .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON_VALUE))
         .andExpect(jsonPath("$", hasSize(1)))
         .andExpect(jsonPath("$[0].id", is(score.getId().toString())))
         .andExpect(jsonPath("$[0].time").value(score.getTime().format(FORMATTER)))
         .andExpect(jsonPath("$[0].score", is(score.getScore())))
         .andExpect(jsonPath("$[0].player", is(score.getPlayer())));
 
-    verify(service, times(1)).getAll(
-        eq(pageNo),
-        eq(pageSize),
-        eq(time),
-        any(ScoreFilter.class));
+    verify(service, times(1)).getAll(eq(pageNo), eq(pageSize), eq(time), any(ScoreFilter.class));
   }
 
   @RepeatedTest(3)
@@ -164,11 +153,11 @@ class ScoreControllerTest {
 
     given(service.get(scoreId)).willReturn(Optional.of(score));
 
-    mvc.perform(MockMvcRequestBuilders.get("/scores/" + scoreId)
-        .contentType(MediaType.APPLICATION_JSON_VALUE))
+    mvc.perform(
+            MockMvcRequestBuilders.get("/scores/" + scoreId)
+                .contentType(MediaType.APPLICATION_JSON_VALUE))
         .andExpect(status().isOk())
-        .andExpect(content()
-            .contentTypeCompatibleWith(MediaType.APPLICATION_JSON_VALUE))
+        .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON_VALUE))
         .andExpect(jsonPath("$.id", is(score.getId().toString())))
         .andExpect(jsonPath("$.time").value(score.getTime().format(FORMATTER)))
         .andExpect(jsonPath("$.score", is(score.getScore())))
@@ -181,12 +170,13 @@ class ScoreControllerTest {
   void givenScore_whenAddScore_thenReturnCreated() throws Exception {
     willDoNothing().given(service).add(any(Score.class));
 
-    mvc.perform(MockMvcRequestBuilders.post("/scores")
-        .contentType(MediaType.APPLICATION_JSON_VALUE)
-        .content("{\"player\": \"Player\",\"score\": 100,\"time\": \"2021-04-19T13:58:06\"}"))
+    mvc.perform(
+            MockMvcRequestBuilders.post("/scores")
+                .contentType(MediaType.APPLICATION_JSON_VALUE)
+                .content(
+                    "{\"player\": \"Player\",\"score\": 100,\"time\": \"2021-04-19T13:58:06\"}"))
         .andExpect(status().isCreated())
-        .andExpect(content()
-            .contentTypeCompatibleWith(MediaType.APPLICATION_JSON_VALUE))
+        .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON_VALUE))
         .andExpect(content().string("Added"));
 
     verify(service, times(1)).add(any(Score.class));
@@ -199,8 +189,7 @@ class ScoreControllerTest {
 
     mvc.perform(MockMvcRequestBuilders.delete("/scores/" + scoreId))
         .andExpect(status().isOk())
-        .andExpect(content()
-            .contentTypeCompatibleWith(MediaType.APPLICATION_JSON_VALUE))
+        .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON_VALUE))
         .andExpect(content().string("Deleted"));
 
     verify(service, times(1)).delete(scoreId);

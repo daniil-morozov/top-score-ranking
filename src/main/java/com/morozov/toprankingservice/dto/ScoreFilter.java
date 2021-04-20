@@ -26,6 +26,7 @@ public class ScoreFilter {
   }
 
   public LocalDateTime getAfter() {
+
     return after;
   }
 
@@ -38,7 +39,8 @@ public class ScoreFilter {
       return false;
     }
     ScoreFilter filter = (ScoreFilter) o;
-    return Objects.equals(players, filter.players) && Objects.equals(before, filter.before)
+    return Objects.equals(players, filter.players)
+        && Objects.equals(before, filter.before)
         && Objects.equals(after, filter.after);
   }
 

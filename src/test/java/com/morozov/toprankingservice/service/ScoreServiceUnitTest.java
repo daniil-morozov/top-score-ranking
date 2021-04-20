@@ -55,14 +55,11 @@ class ScoreServiceUnitTest {
     final List<ScoreEntity> repoResponse = generateResponse();
     final List<Score> expected = makeServiceResponse(repoResponse);
 
-    Mockito.when(repository.findByPlayerIn(players, pageable)).thenReturn(
-        new PageImpl<>(repoResponse, pageable, 2L));
+    Mockito.when(repository.findByPlayerIn(players, pageable))
+        .thenReturn(new PageImpl<>(repoResponse, pageable, 2L));
 
     final ScoreService service = new ScoreService(repository);
-    final List<Score> result = service.getAll(0,
-        5,
-        "id",
-        new ScoreFilter(players, null, null));
+    final List<Score> result = service.getAll(0, 5, "id", new ScoreFilter(players, null, null));
 
     Mockito.verify(repository).findByPlayerIn(players, pageable);
     assertEquals(expected, result, "Should return 2 entities");
@@ -81,14 +78,11 @@ class ScoreServiceUnitTest {
     final List<ScoreEntity> repoResponse = generateResponse();
     final List<Score> expected = makeServiceResponse(repoResponse);
 
-    Mockito.when(repository.findByPlayerInAndTimeBefore(players, before, pageable)).thenReturn(
-        new PageImpl<>(repoResponse, pageable, 2L));
+    Mockito.when(repository.findByPlayerInAndTimeBefore(players, before, pageable))
+        .thenReturn(new PageImpl<>(repoResponse, pageable, 2L));
 
     final ScoreService service = new ScoreService(repository);
-    final List<Score> result = service.getAll(0,
-        5,
-        "id",
-        new ScoreFilter(players, before, null));
+    final List<Score> result = service.getAll(0, 5, "id", new ScoreFilter(players, before, null));
 
     Mockito.verify(repository).findByPlayerInAndTimeBefore(players, before, pageable);
     assertEquals(expected, result, "Should return 2 entities");
@@ -109,14 +103,10 @@ class ScoreServiceUnitTest {
     final List<Score> expected = makeServiceResponse(repoResponse);
 
     Mockito.when(repository.findByPlayerInAndTimeBetween(players, after, before, pageable))
-        .thenReturn(
-            new PageImpl<>(repoResponse, pageable, 2L));
+        .thenReturn(new PageImpl<>(repoResponse, pageable, 2L));
 
     final ScoreService service = new ScoreService(repository);
-    final List<Score> result = service.getAll(0,
-        5,
-        "id",
-        new ScoreFilter(players, before, after));
+    final List<Score> result = service.getAll(0, 5, "id", new ScoreFilter(players, before, after));
 
     Mockito.verify(repository).findByPlayerInAndTimeBetween(players, after, before, pageable);
     assertEquals(expected, result, "Should return 2 entities");
@@ -135,14 +125,11 @@ class ScoreServiceUnitTest {
     final List<ScoreEntity> repoResponse = generateResponse();
     final List<Score> expected = makeServiceResponse(repoResponse);
 
-    Mockito.when(repository.findByPlayerInAndTimeAfter(players, after, pageable)).thenReturn(
-        new PageImpl<>(repoResponse, pageable, 2L));
+    Mockito.when(repository.findByPlayerInAndTimeAfter(players, after, pageable))
+        .thenReturn(new PageImpl<>(repoResponse, pageable, 2L));
 
     final ScoreService service = new ScoreService(repository);
-    final List<Score> result = service.getAll(0,
-        5,
-        "id",
-        new ScoreFilter(players, null, after));
+    final List<Score> result = service.getAll(0, 5, "id", new ScoreFilter(players, null, after));
 
     Mockito.verify(repository).findByPlayerInAndTimeAfter(players, after, pageable);
     assertEquals(expected, result, "Should return 2 entities");
@@ -160,14 +147,11 @@ class ScoreServiceUnitTest {
     final List<ScoreEntity> repoResponse = generateResponse();
     final List<Score> expected = makeServiceResponse(repoResponse);
 
-    Mockito.when(repository.findByTimeBefore(before, pageable)).thenReturn(
-        new PageImpl<>(repoResponse, pageable, 2L));
+    Mockito.when(repository.findByTimeBefore(before, pageable))
+        .thenReturn(new PageImpl<>(repoResponse, pageable, 2L));
 
     final ScoreService service = new ScoreService(repository);
-    final List<Score> result = service.getAll(0,
-        5,
-        "id",
-        new ScoreFilter(null, before, null));
+    final List<Score> result = service.getAll(0, 5, "id", new ScoreFilter(null, before, null));
 
     Mockito.verify(repository).findByTimeBefore(before, pageable);
     assertEquals(expected, result, "Should return 2 entities");
@@ -185,14 +169,11 @@ class ScoreServiceUnitTest {
     final List<ScoreEntity> repoResponse = generateResponse();
     final List<Score> expected = makeServiceResponse(repoResponse);
 
-    Mockito.when(repository.findByTimeAfter(after, pageable)).thenReturn(
-        new PageImpl<>(repoResponse, pageable, 2L));
+    Mockito.when(repository.findByTimeAfter(after, pageable))
+        .thenReturn(new PageImpl<>(repoResponse, pageable, 2L));
 
     final ScoreService service = new ScoreService(repository);
-    final List<Score> result = service.getAll(0,
-        5,
-        "id",
-        new ScoreFilter(null, null, after));
+    final List<Score> result = service.getAll(0, 5, "id", new ScoreFilter(null, null, after));
 
     Mockito.verify(repository).findByTimeAfter(after, pageable);
     assertEquals(expected, result, "Should return 2 entities");
@@ -211,14 +192,11 @@ class ScoreServiceUnitTest {
     final List<ScoreEntity> repoResponse = generateResponse();
     final List<Score> expected = makeServiceResponse(repoResponse);
 
-    Mockito.when(repository.findByTimeBetween(after, before, pageable)).thenReturn(
-        new PageImpl<>(repoResponse, pageable, 2L));
+    Mockito.when(repository.findByTimeBetween(after, before, pageable))
+        .thenReturn(new PageImpl<>(repoResponse, pageable, 2L));
 
     final ScoreService service = new ScoreService(repository);
-    final List<Score> result = service.getAll(0,
-        5,
-        "id",
-        new ScoreFilter(null, before, after));
+    final List<Score> result = service.getAll(0, 5, "id", new ScoreFilter(null, before, after));
 
     Mockito.verify(repository).findByTimeBetween(after, before, pageable);
     assertEquals(expected, result, "Should return 2 entities");
@@ -234,9 +212,8 @@ class ScoreServiceUnitTest {
     final List<ScoreEntity> repoResponse = Collections.emptyList();
     final List<Score> expected = Collections.emptyList();
 
-    Mockito.when(repository.findAll(pageable)).thenReturn(new PageImpl<>(repoResponse,
-        pageable,
-        2L));
+    Mockito.when(repository.findAll(pageable))
+        .thenReturn(new PageImpl<>(repoResponse, pageable, 2L));
 
     final ScoreService service = new ScoreService(repository);
     final List<Score> result = service.getAll(10, 5, "id", ScoreFilter.EMPTY);
@@ -293,27 +270,23 @@ class ScoreServiceUnitTest {
   }
 
   private List<ScoreEntity> generateResponse() {
-    return List.of(generateEntity(),
-        new ScoreEntity(UUID.randomUUID(),
-            "player2",
-            4,
-            LocalDateTime.now()));
+    return List.of(
+        generateEntity(), new ScoreEntity(UUID.randomUUID(), "player2", 4, LocalDateTime.now()));
   }
 
   private ScoreEntity generateEntity() {
-    return new ScoreEntity(UUID.randomUUID(),
-        "player1",
-        5,
-        LocalDateTime.now());
+    return new ScoreEntity(UUID.randomUUID(), "player1", 5, LocalDateTime.now());
   }
 
   private List<Score> makeServiceResponse(List<ScoreEntity> entities) {
-    return entities
-        .stream()
-        .map(scoreEntity -> new Score(scoreEntity.getId(),
-            scoreEntity.getPlayer(),
-            scoreEntity.getScore(),
-            scoreEntity.getTime()))
+    return entities.stream()
+        .map(
+            scoreEntity ->
+                new Score(
+                    scoreEntity.getId(),
+                    scoreEntity.getPlayer(),
+                    scoreEntity.getScore(),
+                    scoreEntity.getTime()))
         .collect(Collectors.toList());
   }
 }

@@ -12,7 +12,8 @@ public class AddScoreRequest {
   private final LocalDateTime time;
 
   @JsonCreator
-  public AddScoreRequest(@JsonProperty("player") String player,
+  public AddScoreRequest(
+      @JsonProperty("player") String player,
       @JsonProperty("score") Integer score,
       @JsonProperty("time") LocalDateTime time) {
     this.player = player;
@@ -37,10 +38,14 @@ public class AddScoreRequest {
 
   @Override
   public String toString() {
-    return "ScoreRequest{" +
-        "player='" + player + '\'' +
-        ", score=" + score +
-        ", time=" + time +
-        '}';
+    return "ScoreRequest{"
+        + "player='"
+        + player
+        + '\''
+        + ", score="
+        + score
+        + ", time="
+        + time
+        + '}';
   }
 }

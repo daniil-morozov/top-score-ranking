@@ -42,12 +42,17 @@ public class ScoreResponse {
 
   @Override
   public String toString() {
-    return "Score{" +
-        "id=" + id +
-        ", player='" + player + '\'' +
-        ", score=" + score +
-        ", time=" + time +
-        '}';
+    return "Score{"
+        + "id="
+        + id
+        + ", player='"
+        + player
+        + '\''
+        + ", score="
+        + score
+        + ", time="
+        + time
+        + '}';
   }
 
   @Override
@@ -59,8 +64,10 @@ public class ScoreResponse {
       return false;
     }
     ScoreResponse scoreResponse1 = (ScoreResponse) o;
-    return id.equals(scoreResponse1.id) && player.equals(scoreResponse1.player) && score
-        .equals(scoreResponse1.score) && time.equals(scoreResponse1.time);
+    return id.equals(scoreResponse1.id)
+        && player.equals(scoreResponse1.player)
+        && score.equals(scoreResponse1.score)
+        && time.equals(scoreResponse1.time);
   }
 
   @Override

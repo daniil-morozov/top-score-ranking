@@ -13,7 +13,8 @@ public class GetScoreRequest {
   private final List<String> players;
 
   @JsonCreator
-  public GetScoreRequest(@JsonProperty("before") LocalDateTime before,
+  public GetScoreRequest(
+      @JsonProperty("before") LocalDateTime before,
       @JsonProperty("after") LocalDateTime after,
       @JsonProperty("players") List<String> players) {
     this.before = before;

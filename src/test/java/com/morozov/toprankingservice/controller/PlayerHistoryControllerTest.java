@@ -30,31 +30,29 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 class PlayerHistoryControllerTest {
 
   public static final Random RANDOM = new Random();
-  private static final DateTimeFormatter FORMATTER = new DateTimeFormatterBuilder()
-      .appendPattern("yyyy-MM-dd'T'HH:mm:ss")
-      .optionalStart()
-      .appendFraction(ChronoField.MICRO_OF_SECOND, 0, 6, true)
-      .optionalEnd()
-      .toFormatter();
-  @Autowired
-  private MockMvc mvc;
+  private static final DateTimeFormatter FORMATTER =
+      new DateTimeFormatterBuilder()
+          .appendPattern("yyyy-MM-dd'T'HH:mm:ss")
+          .optionalStart()
+          .appendFraction(ChronoField.MICRO_OF_SECOND, 0, 6, true)
+          .optionalEnd()
+          .toFormatter();
+  @Autowired private MockMvc mvc;
 
-  @MockBean
-  private PlayerScoreHistoryService service;
+  @MockBean private PlayerScoreHistoryService service;
 
   @RepeatedTest(3)
   void getAll() throws Exception {
     final String player = "player";
-    final ScoreRepository.TimeScore score = new TimeScoreImpl(LocalDateTime.now(),
-        RANDOM.nextInt());
+    final ScoreRepository.TimeScore score =
+        new TimeScoreImpl(LocalDateTime.now(), RANDOM.nextInt());
     final List<ScoreRepository.TimeScore> allScores = List.of(score);
 
     given(service.getAll(player)).willReturn(allScores);
 
     mvc.perform(MockMvcRequestBuilders.get("/playerscorehistory/" + player))
         .andExpect(status().isOk())
-        .andExpect(content()
-            .contentTypeCompatibleWith(MediaType.APPLICATION_JSON_VALUE))
+        .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON_VALUE))
         .andExpect(jsonPath("$", hasSize(1)))
         .andExpect(jsonPath("$[0].time").value(score.getTime().format(FORMATTER)))
         .andExpect(jsonPath("$[0].score", is(score.getScore())));
@@ -65,15 +63,14 @@ class PlayerHistoryControllerTest {
   @RepeatedTest(3)
   void getTop() throws Exception {
     final String player = "player";
-    final ScoreRepository.TimeScore score = new TimeScoreImpl(LocalDateTime.now(),
-        RANDOM.nextInt());
+    final ScoreRepository.TimeScore score =
+        new TimeScoreImpl(LocalDateTime.now(), RANDOM.nextInt());
 
     given(service.getTop(player)).willReturn(score);
 
     mvc.perform(MockMvcRequestBuilders.get("/playerscorehistory/top/" + player))
         .andExpect(status().isOk())
-        .andExpect(content()
-            .contentTypeCompatibleWith(MediaType.APPLICATION_JSON_VALUE))
+        .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON_VALUE))
         .andExpect(jsonPath("$.time").value(score.getTime().format(FORMATTER)))
         .andExpect(jsonPath("$.score", is(score.getScore())));
 
@@ -83,15 +80,14 @@ class PlayerHistoryControllerTest {
   @RepeatedTest(3)
   void getLowest() throws Exception {
     final String player = "player";
-    final ScoreRepository.TimeScore score = new TimeScoreImpl(LocalDateTime.now(),
-        RANDOM.nextInt());
+    final ScoreRepository.TimeScore score =
+        new TimeScoreImpl(LocalDateTime.now(), RANDOM.nextInt());
 
     given(service.getLowest(player)).willReturn(score);
 
     mvc.perform(MockMvcRequestBuilders.get("/playerscorehistory/lowest/" + player))
         .andExpect(status().isOk())
-        .andExpect(content()
-            .contentTypeCompatibleWith(MediaType.APPLICATION_JSON_VALUE))
+        .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON_VALUE))
         .andExpect(jsonPath("$.time").value(score.getTime().format(FORMATTER)))
         .andExpect(jsonPath("$.score", is(score.getScore())));
 
@@ -107,8 +103,7 @@ class PlayerHistoryControllerTest {
 
     mvc.perform(MockMvcRequestBuilders.get("/playerscorehistory/avg/" + player))
         .andExpect(status().isOk())
-        .andExpect(content()
-            .contentTypeCompatibleWith(MediaType.APPLICATION_JSON_VALUE))
+        .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON_VALUE))
         .andExpect(content().string(score.toString()));
 
     verify(service, times(1)).getAverage(player);
@@ -136,12 +131,12 @@ class PlayerHistoryControllerTest {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
+      if (this == o) {
+        return true;
+      }
+      if (o == null || getClass() != o.getClass()) {
+        return false;
+      }
       TimeScoreImpl timeScore = (TimeScoreImpl) o;
       return time.equals(timeScore.time) && score.equals(timeScore.score);
     }

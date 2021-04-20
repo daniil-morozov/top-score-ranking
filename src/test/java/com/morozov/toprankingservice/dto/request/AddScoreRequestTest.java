@@ -6,7 +6,6 @@ import java.time.LocalDateTime;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
-
 class AddScoreRequestTest {
 
   @Test

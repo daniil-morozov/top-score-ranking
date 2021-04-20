@@ -8,15 +8,12 @@ import javax.persistence.Id;
 @Entity(name = "score")
 public class ScoreEntity {
 
-  @Id
-  private UUID id;
+  @Id private UUID id;
   private String player;
   private Integer score;
   private LocalDateTime time;
 
-  public ScoreEntity() {
-
-  }
+  public ScoreEntity() {}
 
   public ScoreEntity(UUID id, String player, Integer score, LocalDateTime time) {
     this.id = id;
@@ -43,11 +40,16 @@ public class ScoreEntity {
 
   @Override
   public String toString() {
-    return "Score{" +
-        "id=" + id +
-        ", player='" + player + '\'' +
-        ", score=" + score +
-        ", time=" + time +
-        '}';
+    return "Score{"
+        + "id="
+        + id
+        + ", player='"
+        + player
+        + '\''
+        + ", score="
+        + score
+        + ", time="
+        + time
+        + '}';
   }
 }
