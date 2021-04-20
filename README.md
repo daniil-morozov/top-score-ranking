@@ -320,7 +320,7 @@ Delete a score with a specified id
     ```
 
 
-##Player history
+## Player history
 
 **Get all scores for a player**
 ----
