@@ -161,7 +161,7 @@ If the request body is empty/null, then the method returns all scores<br>
 * **URL Params**
 
     | Parameter | Type | Description |
-      | :--- | :--- | :--- |
+    | :--- | :--- | :--- |
     | `page` | `integer` | **Required**. 0-based page number |
     | `size` | `integer` | **Required**. page size |
   
