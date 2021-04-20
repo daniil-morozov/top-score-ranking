@@ -155,7 +155,7 @@ If the request body is empty/null, then the method returns all scores<br>
 * **URL**
 
   ```http
-  GET /scores/all:pageId&size
+  GET /scores/all?page={}&size={}
   ```
   
 * **URL Params**
