@@ -22,7 +22,7 @@ Thus must allow the following actions:
 
 ### DB Schema
 
-```roomsql
+``` sql
 CREATE SCHEMA testdb;
 
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
@@ -148,7 +148,10 @@ Get a score by its id
 Get a score by a specified filter and paging. <br>
 The filter is in request body and optional.<br>
 It allows filtering scores by player names, start and end time <br>
-If the request body is empty/null, then the method returns all scores
+If the request body is empty/null, then the method returns all scores<br>
+* **Remarks**
+
+  Player name will be converted to lowercase, so `Edo` and `edo` are the same
 
 * **URL**
 
@@ -220,6 +223,9 @@ If the request body is empty/null, then the method returns all scores
 **Add score**
 ----
 Add a new score for specified player at certain time
+* **Remarks**
+
+  Player name will be converted to lowercase, so `Edo` and `edo` are the same
 
 * **URL**
 
@@ -326,6 +332,9 @@ Delete a score with a specified id
 **Get all scores for a player**
 ----
 Returns json array of scores for a player.
+* **Remarks**
+
+  Player name will be converted to lowercase, so `Edo` and `edo` are the same
 
 * **URL**
 
@@ -376,6 +385,9 @@ Returns json array of scores for a player.
 **Get the top score for a player**
 ----
 Returns a json object representing a top score for a player.
+* **Remarks**
+
+  Player name will be converted to lowercase, so `Edo` and `edo` are the same
 
 * **URL**
 
@@ -420,6 +432,9 @@ Returns a json object representing a top score for a player.
 **Get the lowest score for a player**
 ----
 Returns a json object representing a top score for a player.
+* **Remarks**
+
+  Player name will be converted to lowercase, so `Edo` and `edo` are the same
 
 * **URL**
 
@@ -464,6 +479,9 @@ Returns a json object representing a top score for a player.
 **Get the average score for a player**
 ----
 Returns a number representing a top score for a player.
+* **Remarks**
+
+  Player name will be converted to lowercase, so `Edo` and `edo` are the same
 
 * **URL**
 
