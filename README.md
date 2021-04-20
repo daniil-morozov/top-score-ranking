@@ -39,7 +39,7 @@ CREATE TABLE score (
 ## Installation
 
 Clone the project from git repository
-```bash
+```shell
 https://github.com/daniil-morozov/top-score-ranking.git
 ```
 
@@ -99,17 +99,16 @@ Get a score by its id
 
 * **URL**
 
-  /scores:scoreId
-
-* **Method:**
-
-  `GET`
+  ```http
+  GET /scores:scoreId
+  ```
 
 * **URL Params**
 
-  **Required:**
+  | Parameter | Type | Description |
+  | :--- | :--- | :--- |
+  | `scoreId` | `UUID` | **Required**. Score id |
 
-  `scoreId=[UUID]`
 
 * **Data Params**
 
@@ -155,19 +154,17 @@ If the request body is empty/null, then the method returns all scores<br>
 
 * **URL**
 
-  /scores/all:pageId&size
-
-* **Method:**
-
-  `GET`
-
+  ```http
+  GET /scores/all:pageId&size
+  ```
+  
 * **URL Params**
 
-  **Required:**
-
-  `page=[Integer]`<br>
-  `size=[Integer]`
-
+    | Parameter | Type | Description |
+      | :--- | :--- | :--- |
+    | `page` | `integer` | **Required**. 0-based page number |
+    | `size` | `integer` | **Required**. page size |
+  
 * **Data Params**
 
   **Non required:**
@@ -175,13 +172,13 @@ If the request body is empty/null, then the method returns all scores<br>
   JSON Payload
 
   **Content:**
-  ```json
-  {
-    "players": [Optional array of Strings],
-    "before": [Optional date:yyyy-MM-ddTdd:mm:ss],
-    "after": [Optional date:yyyy-MM-ddTdd:mm:ss]
-  }
-  ```
+  
+    | Parameter | Type | Description |
+    | :--- | :--- | :--- |
+    | `players` | `array of string` | **Optional**. player names |
+    | `after` | `date:yyyy-MM-ddTdd:mm:ss` | **Optional**. start date |
+    | `before` | `date:yyyy-MM-ddTdd:mm:ss` | **Optional**. end date |
+  
 
 * **Success Response:**
 
@@ -229,11 +226,9 @@ Add a new score for specified player at certain time
 
 * **URL**
 
-  /scores
-
-* **Method:**
-
-  `POST`
+  ```http
+  POST /scores
+  ```
 
 * **URL Params**
 
@@ -246,13 +241,12 @@ Add a new score for specified player at certain time
     JSON Payload
   
     **Content:**
-  ```json
-  {
-    "player": [String],
-    "time": [Date:yyyy-MM-ddTdd:mm:ss],
-    "score": [Integer]>0
-  }
-  ```
+
+    | Parameter | Type | Description |
+        | :--- | :--- | :--- |
+    | `player` | `string` | **Required**. player name |
+    | `time` | `date:yyyy-MM-ddTdd:mm:ss` | **Required**. score time |
+    | `score` | `integer` | **Required**. score value. must be > 0 |
 
 * **Success Response:**
 
@@ -288,17 +282,15 @@ Delete a score with a specified id
 
 * **URL**
 
-  /scores:scoreId
-
-* **Method:**
-
-  `DELETE`
+  ```http
+  DELETE /scores:scoreId
+  ```
   
 *  **URL Params**
-
-   **Required:**
-
-   `scoreId=[UUID]`
+   
+    | Parameter | Type | Description |
+    | :--- | :--- | :--- |
+    | `scoreId` | `UUID` | **Required**. score id |
 
 * **Data Params**
 
@@ -338,17 +330,15 @@ Returns json array of scores for a player.
 
 * **URL**
 
-  /playerscorehistory/:player
-
-* **Method:**
-
-  `GET`
+  ```http
+  GET /playerscorehistory/:player
+  ```
 
 *  **URL Params**
 
-   **Required:**
-
-   `player=[String]`
+   | Parameter | Type | Description |
+   | :--- | :--- | :--- |
+   | `player` | `string` | **Required**. player name |
 
 * **Data Params**
 
@@ -391,17 +381,15 @@ Returns a json object representing a top score for a player.
 
 * **URL**
 
-  /playerscorehistory/top/:player
-
-* **Method:**
-
-  `GET`
+  ```http
+  GET /playerscorehistory/top/:player
+  ```
 
 *  **URL Params**
 
-   **Required:**
-
-   `player=[String]`
+    | Parameter | Type | Description |
+    | :--- | :--- | :--- |
+    | `player` | `string` | **Required**. player name |
 
 * **Data Params**
 
@@ -438,17 +426,15 @@ Returns a json object representing a top score for a player.
 
 * **URL**
 
-  /playerscorehistory/lowest/:player
-
-* **Method:**
-
-  `GET`
+  ```http
+  GET /playerscorehistory/lowest/:player
+  ```
 
 *  **URL Params**
 
-   **Required:**
-
-   `player=[String]`
+    | Parameter | Type | Description |
+    | :--- | :--- | :--- |
+    | `player` | `string` | **Required**. player name |
 
 * **Data Params**
 
@@ -485,17 +471,15 @@ Returns a number representing a top score for a player.
 
 * **URL**
 
-  /playerscorehistory/avg/:player
-
-* **Method:**
-
-  `GET`
+  ```http
+  GET /playerscorehistory/avg/:player
+  ```
 
 *  **URL Params**
 
-   **Required:**
-
-   `player=[String]`
+    | Parameter | Type | Description |
+    | :--- | :--- | :--- |
+    | `player` | `string` | **Required**. player name |
 
 * **Data Params**
 
