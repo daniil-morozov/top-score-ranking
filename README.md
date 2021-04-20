@@ -10,7 +10,16 @@ Thus must allow the following actions:
 * **Get player's lowest score**
 * **Get player's average score**
 * **Get all the score of the player**
- 
+
+## Tech Stack
+
+ * Java 11
+ * Gradle 6.8
+ * Spring MVC
+ * Spring Boot 2.4.5
+ * Postgres
+ * JUnit 5
+
 ## Installation
 
 Clone the project from git repository
@@ -21,7 +30,7 @@ https://github.com/daniil-morozov/top-score-ranking.git
 
 ## Prerequisites
 
- * JDK 16
+ * JDK 14 or higher
  * Gradle 
  * Docker or Postgres installed locally with default port 5432
 
